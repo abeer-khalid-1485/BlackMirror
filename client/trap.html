@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Security Awareness</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #ddd;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-container {
+      background-color: #1e1e1e;
+      padding: 2rem 3rem;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 0 15px rgba(78, 168, 222, 0.3);
+      text-align: center;
+    }
+    .logo {
+      width: 120px;
+      margin-bottom: 1rem;
+    }
+    h2 {
+      color: #e03e3e;
+      margin-bottom: 1rem;
+    }
+    p, ul {
+      line-height: 1.6;
+      margin: 0.5rem 0;
+    }
+    ul {
+      text-align: left;
+      margin: 1rem 0;
+      padding-left: 1.2rem;
+      color: #4ea8de;
+    }
+    ul li {
+      margin-bottom: 0.7rem;
+    }
+    button {
+      background-color: #4ea8de;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      color: #1e1e1e;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #3490c5;
+    }
+    .footer {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #8b949e;
+    }
+    a {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <img src="assets/blackmirror_logo.png" alt="CyberShield Logo" class="logo" />
+
+    <div id="content-en" style="display: none;">
+      <h2>You’ve Been Tricked!</h2>
+      <p>This was a simulated phishing attempt designed to raise your awareness.</p>
+      <p>Never enter your credentials into untrusted websites.</p>
+      <p style="color: #4ea8de;">Always verify URLs, look for HTTPS, and think twice before clicking unknown links.</p>
+      <h3 style="color: #4ea8de;">How to Deal with Phishing Attempts:</h3>
+      <ul>
+        <li>Check the website URL carefully and ensure it's secure (HTTPS).</li>
+        <li>Don't click links in suspicious emails or messages.</li>
+        <li>Use two-factor authentication (2FA) where possible.</li>
+        <li>Never share passwords or financial info unless you're 100% sure.</li>
+        <li>Contact your IT/security team if unsure.</li>
+        <li>Keep your systems and antivirus updated.</li>
+        <li>Real companies don’t ask for passwords via email.</li>
+      </ul>
+      <p><a href="scanner.html" style="color: #4ea8de; font-weight: bold;">Check the safety of suspicious links here</a></p>
+      <br>
+      <a href="scanner.html">
+        <button>Scan a Suspicious Link</button>
+      </a>
+    </div>
+
+    <div id="content-ar" style="display: none; direction: rtl; text-align: right;">
+      <h2>لقد وقعت في الفخ!</h2>
+      <p>هذه كانت محاولة تصيد وهمية بهدف رفع وعيك الأمني.</p>
+      <p>لا تدخل معلوماتك الشخصية في مواقع غير موثوقة.</p>
+      <p style="color: #4ea8de;">تحقّق دائمًا من الروابط ووجود HTTPS قبل التفاعل مع أي موقع.</p>
+      <h3 style="color: #4ea8de;">كيف تتعامل مع محاولات التصيد؟</h3>
+      <ul>
+        <li>تحقّق من عنوان الموقع قبل إدخال أي معلومات.</li>
+        <li>لا تضغط على روابط في رسائل مشبوهة أو غير متوقعة.</li>
+        <li>استخدم التحقق بخطوتين كلما أمكن.</li>
+        <li>لا تشارك كلمات المرور أو بياناتك البنكية أبدًا.</li>
+        <li>تواصل مع فريق الأمن السيبراني في شركتك عند الشك.</li>
+        <li>حدّث نظامك وبرامج الحماية باستمرار.</li>
+        <li>الشركات الحقيقية لا تطلب معلومات حساسة بالبريد.</li>
+      </ul>
+     
+      <a href="scanner.html">
+        <button>فحص رابط مشبوه</button>
+      </a>
+    </div>
+
+    <p class="footer">- CyberShield Corp.</p>
+  </div>
+
+  <script>
+    const lang = navigator.language || navigator.userLanguage;
+    if (lang.startsWith('ar')) {
+      document.getElementById('content-ar').style.display = 'block';
+    } else {
+      document.getElementById('content-en').style.display = 'block';
+    }
+  </script>
+
+<script>
+  document.addEventListener("keydown", function (e) {
+    if (
+      e.key === "F12" ||
+      (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "C" || e.key === "J")) ||
+      (e.ctrlKey && e.key === "U")
+    ) {
+      e.preventDefault();
+    }
+  });
+
+  document.addEventListener("contextmenu", function (e) {
+    e.preventDefault();
+  });
+</script>
+</body>
+</html>

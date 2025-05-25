@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>أداة فحص الروابط</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="scanner-container">
+    <img src="/assets/blackmirror_logo.png" alt="Black Mirror Logo" class="logo">
+    <h2>🔍 فحص رابط مشبوه</h2>
+    <form>
+      <input type="text" id="url" placeholder="أدخل الرابط هنا" required>
+      <button type="submit">فحص الرابط</button>
+    </form>
+    <p id="result" class="result-text"></p>
+  </div>
+
+  <!-- كود الحماية من أدوات المطور -->
+  <script>
+    document.addEventListener("keydown", function (e) {
+      if (
+        e.key === "F12" ||
+        (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "C" || e.key === "J")) ||
+        (e.ctrlKey && e.key === "U")
+      ) {
+        e.preventDefault();
+      }
+    });
+    document.addEventListener("contextmenu", function (e) {
+      e.preventDefault();
+    });
+  </script>
+
+  <!-- كود فحص الرابط + زر الإبلاغ -->
+  <script>
+    const form = document.querySelector("form");
+    const urlInput = document.getElementById("url");
+    const resultText = document.getElementById("result");
+
+    let reportButton;
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const url = urlInput.value.trim();
+
+      resultText.textContent = "🔄 جاري الفحص...";
+      resultText.style.color = "gray";
+
+      if (reportButton) {
+        reportButton.remove();
+        reportButton = null;
+      }
+
+      try {
+        const response = await fetch("/check-url", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ url })
+        });
+
+        const data = await response.json();
+
+        if (data.safe) {
+          resultText.textContent = "✅ الرابط آمن";
+          resultText.style.color = "green";
+        } else {
+          resultText.textContent = "🚫 الرابط مشبوه: " + (data.info || "تم الإبلاغ عنه كموقع خطير");
+          resultText.style.color = "red";
+
+          reportButton = document.createElement("button");
+          reportButton.textContent = "📩 الإبلاغ عن رابط التصيد";
+          reportButton.style.marginTop = "1rem";
+          form.appendChild(reportButton);
+
+          reportButton.addEventListener("click", async (event) => {
+            event.preventDefault();
+            try {
+              const res = await fetch("/report-url", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ url })
+              });
+
+              const result = await res.json();
+              if (result.success) {
+                resultText.textContent = "✅ تم الإبلاغ، شكرًا لمساهمتك.";
+                resultText.style.color = "blue";
+                reportButton.remove();
+                reportButton = null;
+              } else {
+                resultText.textContent = "⚠️ فشل في الإبلاغ.";
+                resultText.style.color = "orange";
+              }
+            } catch (err) {
+              resultText.textContent = "⚠️ خطأ أثناء الإبلاغ: " + err.message;
+              resultText.style.color = "red";
+            }
+          });
+        }
+      } catch (err) {
+        resultText.textContent = "⚠️ حدث خطأ: " + err.message;
+        resultText.style.color = "red";
+      }
+    });
+  </script>
+</body>
+</html>

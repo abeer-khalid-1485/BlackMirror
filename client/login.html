@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CyberShield Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="login-container">
+    <img src="assets/CyberShield_logo.png" alt="CyberShield Logo" class="logo">
+    <h2>Secure Email Validation</h2>
+
+    <form onsubmit="redirectToTrap(); return false;">
+      <input type="email" name="email" placeholder="Enter your email" required>
+      <input type="text" name="code" placeholder="Enter security code" required>
+      <button type="submit">Verify</button>
+    </form>
+
+    <p class="disclaimer">This validation is required to access internal resources.</p>
+  </div>
+
+  <script src="detectDevTools.js"></script>
+  <script>
+    function redirectToTrap() {
+      fetch('/api/log', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ event: 'login_attempt', timestamp: new Date().toISOString() })
+      })
+      .then(() => {
+        window.location.href = "trap.html";
+      })
+      .catch((error) => {
+        console.error('خطأ أثناء إرسال التسجيل:', error);
+        window.location.href = "trap.html";
+      });
+    }
+  </script>
+
+  <script>
+    document.addEventListener("keydown", function (e) {
+      if (
+        e.key === "F12" ||
+        (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "C" || e.key === "J")) ||
+        (e.ctrlKey && e.key === "U")
+      ) {
+        e.preventDefault();
+      }
+    });
+
+    document.addEventListener("contextmenu", function (e) {
+      e.preventDefault();
+    });
+  </script>
+</body>
+</html>

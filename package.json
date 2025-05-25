@@ -1,0 +1,15 @@
+
+{
+  "name": "blackmirror",
+  "version": "1.0.0",
+  "description": "مشروع توعوي لفحص الروابط ضد التصيد الاحتيالي",
+  "main": "server/backend.js",
+  "scripts": {
+    "start": "node server/backend.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "node-fetch": "^2.6.7",
+    "sqlite3": "^5.1.2"
+  }
+}

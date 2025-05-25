@@ -1,0 +1,58 @@
+body {
+    background-color: #0d1117;
+    color: #c9d1d9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.login-container {
+    background-color: #161b22;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    text-align: center;
+    width: 350px;
+}
+
+.logo {
+    width: 100px;
+    margin-bottom: 1rem;
+}
+
+input[type="email"],
+input[type="text"] {
+    width: 90%;
+    padding: 0.7rem;
+    margin: 0.5rem 0;
+    border: none;
+    border-radius: 6px;
+    background-color: #0d1117;
+    color: #c9d1d9;
+    border: 1px solid #30363d;
+}
+
+button {
+    width: 95%;
+    padding: 0.8rem;
+    margin-top: 1rem;
+    border: none;
+    border-radius: 6px;
+    background-color: #238636;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2ea043;
+}
+
+.disclaimer {
+    font-size: 0.8rem;
+    color: #8b949e;
+    margin-top: 1rem;
+}
