@@ -37,7 +37,7 @@ app.post("/check-url", async (req, res) => {
   }
 
   try {
-    const response = await fetch(`https://safebrowsing.googleapis.com/v4/threatMatches:find?key=AIzaSyCmN0trY5S4Yh83_NLOvM7uHbAndS2QKYM`, {
+    const response = await fetch(`https://safebrowsing.googleapis.com/v4/threatMatches:find?key=${process.env.GOOGLE_SAFE_BROWSING_KEY}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
